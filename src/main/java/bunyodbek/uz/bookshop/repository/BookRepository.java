@@ -1,0 +1,7 @@
+package bunyodbek.uz.bookshop.repository;
+
+import bunyodbek.uz.bookshop.model.Book;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface BookRepository  extends JpaRepository<Book, Long> {
+}
