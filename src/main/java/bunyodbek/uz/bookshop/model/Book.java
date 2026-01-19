@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Book {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,5 +21,7 @@ public class Book {
     private String name;
     private String imageUrl;
     private Double price;
-
+    private String category;
+    
+    private Boolean deleted = false;
 }

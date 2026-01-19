@@ -8,19 +8,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "users")
-public class User {
+@Entity
+public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    private Long chatId;
+    @ManyToOne
+    private Book book;
 
-    private String phoneNumber;
-    private String firstName;
-    private String lastName;
-    private String username;
-
-    private String role; // ADMIN or USER
+    private Integer quantity;
+    private Double price;
 }

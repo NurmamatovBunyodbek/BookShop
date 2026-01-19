@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: bookshop-bot
+    restart: always
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/bookshop_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      # Bot credentials (replace with actual values or use .env file)
+      - BOT_NAME=your_bot_username
+      - BOT_TOKEN=your_bot_token
+      # Multiple admin IDs separated by comma (e.g., 123456789,987654321)
+      - BOT_ADMIN_CHATIDS=123456789,987654321
+    depends_on:
+      - db
+    networks:
+      - bookshop-network
+
+  db:
+    image: postgres:16-alpine
+    container_name: bookshop-db
+    restart: always
+    environment:
+      - POSTGRES_DB=bookshop_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - bookshop-network
+
+networks:
+  bookshop-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
